@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI People Corp — The first industry standard for human-centred AI integration</title>
+<meta name="description" content="AI People Corp is the first industry standard for human-centred AI integration in organisations. 7 dimensions. 4 maturity levels.">
+<meta property="og:title" content="AI People Corp — The Industry Standard for Human-Centred AI">
+<meta property="og:description" content="7 dimensions. 4 maturity levels. The first framework that measures whether organisations integrate AI in a way that respects their people.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://aipeoplecorp.org">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--crimson:#B91C1C;--crimson-dark:#991B1B;--crimson-light:#DC2626;--white:#FFFFFF;--off-white:#FAFAF9;--light-grey:#F5F5F4;--mid-grey:#A8A29E;--dark-grey:#292524;--text:#1C1917;--text-secondary:#57534E}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Libre Baskerville',Georgia,serif;color:var(--text);background:var(--white);line-height:1.7;-webkit-font-smoothing:antialiased}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+[data-lang]{display:none}
+[data-lang].active{display:block}
+.lang-switch{position:fixed;top:1.2rem;right:1.5rem;z-index:100;display:flex;gap:0;background:rgba(255,255,255,0.95);border:1px solid rgba(0,0,0,0.08);border-radius:6px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.06);backdrop-filter:blur(8px)}
+.lang-btn{padding:0.5rem 1rem;font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.75rem;letter-spacing:0.05em;border:none;background:transparent;cursor:pointer;color:var(--text-secondary);transition:all 0.2s}
+.lang-btn.active{background:var(--crimson);color:var(--white)}
+.lang-btn:hover:not(.active){background:rgba(185,28,28,0.05)}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:4rem 2rem;background:var(--white);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-200px;right:-200px;width:600px;height:600px;border-radius:50%;border:1px solid rgba(185,28,28,0.06);pointer-events:none}
+.hero::after{content:'';position:absolute;bottom:-300px;left:-200px;width:800px;height:800px;border-radius:50%;border:1px solid rgba(185,28,28,0.04);pointer-events:none}
+.logo-badge{width:160px;height:160px;border-radius:50%;border:4px solid var(--crimson);display:flex;flex-direction:column;justify-content:center;align-items:center;margin-bottom:2.5rem;position:relative;animation:fadeIn 1s ease-out}
+.logo-badge::after{content:'';position:absolute;width:140px;height:140px;border-radius:50%;border:1px solid var(--crimson);opacity:0.4}
+.logo-ai,.logo-people{font-family:'Montserrat','Arial Black',sans-serif;font-weight:900;font-size:1.5rem;color:var(--crimson);letter-spacing:0.15em;line-height:1.2}
+.logo-corp{font-family:'Libre Baskerville','Book Antiqua',serif;font-weight:700;font-style:italic;font-size:1.5rem;color:var(--crimson);letter-spacing:0.05em;line-height:1.3}
+.hero-headline{font-family:'Montserrat',sans-serif;font-weight:800;font-size:clamp(2rem,5vw,3.2rem);color:var(--text);line-height:1.15;max-width:700px;margin:0 auto 1.5rem auto;animation:fadeIn 1.2s ease-out 0.2s both;text-align:center}
+.hero-headline em{color:var(--crimson);font-style:normal}
+.hero-tagline{font-family:'Libre Baskerville',serif;font-size:1.1rem;font-style:italic;color:var(--text-secondary);max-width:640px;margin:0 auto 1.5rem auto;animation:fadeIn 1.2s ease-out 0.3s both;text-align:center}
+.hero-measures{font-family:'Montserrat',sans-serif;font-weight:700;font-size:1rem;color:var(--text-secondary);max-width:640px;margin:0 auto 0.3rem auto;animation:fadeIn 1.2s ease-out 0.35s both;text-align:center}
+.hero-question{font-size:1.05rem;color:var(--text-secondary);max-width:640px;margin:0 auto 3rem auto;animation:fadeIn 1.2s ease-out 0.4s both;text-align:center}
+.hero-bold-line{font-family:'Montserrat',sans-serif;font-weight:700;font-size:1rem;color:var(--crimson);max-width:640px;margin:0 auto 0.4rem auto;text-align:center;animation:fadeIn 1.2s ease-out 0.35s both}
+.cta-primary{display:inline-block;background:var(--crimson);color:var(--white);font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.9rem;letter-spacing:0.08em;padding:1rem 2.5rem;border-radius:6px;text-decoration:none;transition:all 0.3s ease;animation:fadeIn 1.2s ease-out 0.5s both}
+.cta-primary:hover{background:var(--crimson-dark);transform:translateY(-2px);box-shadow:0 8px 24px rgba(185,28,28,0.25)}
+.scroll-indicator{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);animation:bounce 2s ease infinite 2s;opacity:0.4}
+.scroll-indicator svg{width:24px;height:24px;stroke:var(--mid-grey);fill:none}
+
+/* PROBLEM */
+.problem{background:var(--dark-grey);color:var(--white);padding:6rem 2rem}
+.problem .container{max-width:720px}
+.section-label{font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.75rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--crimson-light);margin-bottom:1.5rem}
+.problem h2{font-family:'Montserrat',sans-serif;font-weight:800;font-size:clamp(1.8rem,4vw,2.5rem);line-height:1.2;margin-bottom:2rem}
+.problem h2 em{color:var(--crimson-light);font-style:normal}
+.stat-block{display:flex;align-items:baseline;gap:1.5rem;margin:2.5rem 0;padding:2rem 0;border-top:1px solid rgba(255,255,255,0.1);border-bottom:1px solid rgba(255,255,255,0.1)}
+.stat-number{font-family:'Montserrat',sans-serif;font-weight:900;font-size:4rem;color:var(--crimson-light);line-height:1;flex-shrink:0}
+.stat-text{font-size:1.1rem;line-height:1.6;color:rgba(255,255,255,0.8)}
+.problem p{font-size:1.05rem;line-height:1.8;color:rgba(255,255,255,0.75);margin-bottom:1.2rem}
+
+/* DIMENSIONS */
+.dimensions{padding:6rem 2rem;background:var(--off-white)}
+.dimensions .container{max-width:860px}
+.dimensions-header{text-align:center;margin-bottom:2.5rem}
+.dimensions-header .section-label{color:var(--crimson)}
+.dimensions h2{font-family:'Montserrat',sans-serif;font-weight:800;font-size:clamp(1.8rem,4vw,2.5rem);text-align:center;margin-bottom:1rem}
+.dimensions h2 em{color:var(--crimson);font-style:normal}
+.dimensions-intro{text-align:center;color:var(--text-secondary);max-width:600px;margin:0 auto;font-size:1.05rem}
+.dimensions-logo{display:flex;justify-content:center;margin-bottom:1.5rem}
+.logo-badge-mid{width:120px;height:120px;border-radius:50%;border:3.5px solid var(--crimson);display:flex;flex-direction:column;justify-content:center;align-items:center;position:relative;background:var(--white)}
+.logo-badge-mid::after{content:'';position:absolute;width:104px;height:104px;border-radius:50%;border:1px solid var(--crimson);opacity:0.4}
+.logo-badge-mid .logo-ai,.logo-badge-mid .logo-people{font-size:0.95rem;letter-spacing:0.12em}
+.logo-badge-mid .logo-corp{font-size:0.95rem}
+.dimension-grid{display:grid;grid-template-columns:1fr;gap:1px;background:rgba(0,0,0,0.06);border:1px solid rgba(0,0,0,0.06)}
+.dimension-item{background:var(--white);padding:1.2rem 2rem;display:flex;align-items:flex-start;gap:1.2rem;transition:all 0.3s ease}
+.dimension-item:hover{background:rgba(185,28,28,0.02)}
+.dimension-number{font-family:'Montserrat',sans-serif;font-weight:900;font-size:1.6rem;color:var(--crimson);line-height:1;flex-shrink:0;width:2.2rem;text-align:right}
+.dimension-content h3{font-family:'Montserrat',sans-serif;font-weight:700;font-size:1.15rem;color:var(--text);margin-bottom:0.25rem}
+.dimension-content p{font-size:0.9rem;color:var(--text-secondary);line-height:1.5}
+
+/* MATURITY */
+.maturity{padding:6rem 2rem;background:var(--white)}
+.maturity .container{max-width:860px}
+.maturity h2{font-family:'Montserrat',sans-serif;font-weight:800;font-size:clamp(1.8rem,4vw,2.5rem);text-align:center;margin-bottom:1rem}
+.maturity h2 em{color:var(--crimson);font-style:normal}
+.maturity-intro{text-align:center;color:var(--text-secondary);max-width:640px;margin:0 auto 0.8rem auto;font-size:1.05rem}
+.maturity-question{text-align:center;color:var(--crimson);font-family:'Montserrat',sans-serif;font-weight:700;font-size:1rem;margin-bottom:3rem}
+.maturity-track{display:flex;gap:0;position:relative;padding-top:36px}
+.maturity-track::before{content:'';position:absolute;top:60px;left:24px;right:24px;height:2px;background:linear-gradient(to right,#E7E5E4,var(--crimson));z-index:0}
+.maturity-level{flex:1;text-align:center;position:relative;z-index:1;padding:0 0.5rem}
+.level-dot{width:48px;height:48px;border-radius:50%;margin:0 auto 1rem auto;display:flex;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.1rem;color:var(--white);transition:transform 0.3s ease;position:relative;z-index:2}
+.level-dot:hover{transform:scale(1.15)}
+.level-1 .level-dot{background:#D6D3D1;color:var(--text-secondary)}
+.level-2 .level-dot{background:#F59E0B}
+.level-3 .level-dot{background:#D97706}
+.level-4 .level-dot{background:var(--crimson)}
+.maturity-level h4{font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.85rem;letter-spacing:0.05em;margin-bottom:0.4rem;color:var(--text)}
+.maturity-level p{font-size:0.82rem;color:var(--text-secondary);line-height:1.4}
+
+/* WHO IS THIS FOR */
+.audience{padding:5rem 2rem;background:var(--off-white)}
+.audience .container{max-width:960px}
+.audience h2{font-family:'Montserrat',sans-serif;font-weight:800;font-size:clamp(1.6rem,3.5vw,2.2rem);text-align:center;margin-bottom:2.5rem}
+.audience h2 em{color:var(--crimson);font-style:normal}
+.audience-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.2rem;max-width:100%}
+.audience-card{background:var(--white);padding:2rem 1.5rem;border-radius:8px;border:1px solid rgba(0,0,0,0.06);border-top:3px solid var(--crimson);transition:all 0.3s ease}
+.audience-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,0.06)}
+.audience-card h3{font-family:'Montserrat',sans-serif;font-weight:700;font-size:1.1rem;color:var(--crimson);margin-bottom:0.8rem}
+.audience-card p{font-size:0.88rem;color:var(--text-secondary);line-height:1.6}
+
+/* FOUNDING */
+.founding{background:var(--crimson);color:var(--white);padding:6rem 2rem;text-align:center}
+.founding .container{max-width:680px}
+.founding .section-label{color:rgba(255,255,255,0.6)}
+.founding h2{font-family:'Montserrat',sans-serif;font-weight:800;font-size:clamp(1.8rem,4vw,2.5rem);margin-bottom:0.8rem}
+.founding h3{font-family:'Libre Baskerville',serif;font-weight:400;font-style:italic;font-size:1.15rem;color:rgba(255,255,255,0.75);margin-bottom:1.5rem}
+.founding p{font-size:1.05rem;line-height:1.8;color:rgba(255,255,255,0.85);margin-bottom:1.2rem}
+.founding-features{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin:2.5rem 0;text-align:left}
+.founding-feature{padding:1.5rem;background:rgba(255,255,255,0.08);border-radius:6px;border:1px solid rgba(255,255,255,0.1)}
+.founding-feature h4{font-family:'Montserrat',sans-serif;font-weight:700;font-size:1.05rem;letter-spacing:0.03em;margin-bottom:0.5rem}
+.founding-feature p{font-size:0.88rem;color:rgba(255,255,255,0.7);margin-bottom:0;line-height:1.5}
+.cta-secondary{display:inline-block;background:var(--white);color:var(--crimson);font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.9rem;letter-spacing:0.08em;padding:1rem 2.5rem;border-radius:6px;text-decoration:none;margin-top:1.5rem;transition:all 0.3s ease}
+.cta-secondary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.2)}
+
+/* ABOUT */
+.about{padding:5rem 2rem;background:var(--off-white)}
+.about .container{max-width:680px;text-align:center}
+.about p{font-size:1rem;color:var(--text-secondary);line-height:1.8;margin-bottom:0.5rem}
+.about .cities{font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.85rem;letter-spacing:0.15em;color:var(--mid-grey);margin-top:0.5rem;margin-bottom:1.5rem}
+.about a{color:var(--crimson);text-decoration:none}
+.about a:hover{text-decoration:underline}
+
+/* FOOTER */
+.footer{padding:3rem 2rem;background:var(--dark-grey);text-align:center}
+.footer-badge{width:70px;height:70px;border-radius:50%;background:var(--crimson);display:inline-flex;flex-direction:column;justify-content:center;align-items:center;margin-bottom:1.5rem;position:relative}
+.footer-badge::after{content:'';position:absolute;width:60px;height:60px;border-radius:50%;border:1px solid rgba(255,255,255,0.3)}
+.footer-badge .logo-ai,.footer-badge .logo-people{font-size:0.55rem;color:var(--white);letter-spacing:0.1em}
+.footer-badge .logo-corp{font-size:0.55rem;color:var(--white)}
+.footer p{font-size:0.8rem;color:rgba(255,255,255,0.4);line-height:1.6}
+.footer a{color:rgba(255,255,255,0.5);text-decoration:none}
+.footer a:hover{color:var(--white)}
+
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes bounce{0%,20%,50%,80%,100%{transform:translateX(-50%) translateY(0)}40%{transform:translateX(-50%) translateY(-8px)}60%{transform:translateX(-50%) translateY(-4px)}}
+
+@media(max-width:640px){
+.hero{min-height:auto;padding:5rem 1.5rem 4rem}
+.logo-badge{width:130px;height:130px}
+.logo-badge::after{width:114px;height:114px}
+.logo-ai,.logo-people,.logo-corp{font-size:1.25rem}
+.stat-block{flex-direction:column;gap:0.5rem}
+.founding-features{grid-template-columns:1fr}
+.maturity-track{flex-direction:column;gap:1.5rem;padding-top:0}
+.maturity-track::before{display:none}
+.maturity-level{display:flex;align-items:center;gap:1rem;text-align:left}
+.level-dot{margin:0;flex-shrink:0}
+.dimension-item{padding:1rem 1.2rem}
+.audience-grid{grid-template-columns:1fr}
+.lang-switch{top:0.8rem;right:0.8rem}
+}
+</style>
+</head>
+<body>
+
+<!-- LANGUAGE SWITCH -->
+<div class="lang-switch">
+<button class="lang-btn active" onclick="setLang('en')">EN</button>
+<button class="lang-btn" onclick="setLang('fr')">FR</button>
+<button class="lang-btn" onclick="setLang('nl')">NL</button>
+</div>
+
+<!-- HERO (shared visual, text swapped) -->
+<section class="hero">
+<div class="logo-badge">
+<span class="logo-ai">AI</span>
+<span class="logo-people">PEOPLE</span>
+<span class="logo-corp">Corp</span>
+</div>
+<div data-lang="en" class="active">
+<h1 class="hero-headline"><strong>AI People Corp</strong>: the first industry standard for <em>human-centred</em> AI integration</h1>
+<p class="hero-tagline">Because AI transformation is a leadership challenge, not a technology upgrade.</p>
+<p class="hero-bold-line">AI People Corp measures what nobody else measures:</p>
+<p class="hero-measures">7 dimensions. 4 maturity levels.</p>
+<p class="hero-question">One question: is your organisation ready?</p>
+<a href="#founding" class="cta-primary">BECOME A FOUNDING MEMBER</a>
+</div>
+<div data-lang="fr">
+<h1 class="hero-headline"><strong>AI People Corp</strong> : le premier standard industriel pour une intégration <em>humaine</em> de l'IA</h1>
+<p class="hero-tagline">Parce que la transformation IA est un défi de leadership, pas une mise à jour technologique.</p>
+<p class="hero-bold-line">AI People Corp mesure ce que personne d'autre ne mesure :</p>
+<p class="hero-measures">7 dimensions. 4 niveaux de maturité.</p>
+<p class="hero-question">Une question : votre organisation est-elle prête ?</p>
+<a href="#founding" class="cta-primary">DEVENIR MEMBRE FONDATEUR</a>
+</div>
+<div data-lang="nl">
+<h1 class="hero-headline"><strong>AI People Corp</strong>: de eerste industriestandaard voor <em>mensgerichte</em> AI-integratie</h1>
+<p class="hero-tagline">Omdat AI-transformatie een leiderschapsuitdaging is, geen technologische upgrade.</p>
+<p class="hero-bold-line">AI People Corp meet wat niemand anders meet:</p>
+<p class="hero-measures">7 dimensies. 4 volwassenheidsniveaus.</p>
+<p class="hero-question">De vraag is: is uw organisatie klaar?</p>
+<a href="#founding" class="cta-primary">WORD FOUNDING MEMBER</a>
+</div>
+<div class="scroll-indicator"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg></div>
+</section>
+
+<!-- PROBLEM -->
+<section class="problem">
+<div data-lang="en" class="active"><div class="container">
+<p class="section-label">The Problem</p>
+<h2>Everyone talks about AI strategy. Almost nobody talks about the <em>people</em> who have to live with the change.</h2>
+<div class="stat-block"><span class="stat-number">70%</span><span class="stat-text">of AI transformations fail. Not because of bad technology. Because nobody prepared the humans: the leadership, the teams, the governance, the skills.</span></div>
+<p>Companies are rushing to adopt AI tools without aligning their leadership teams, without hearing their workforce, without building governance frameworks, and without cascading the skills their people need.</p>
+<p>There is no recognised standard for measuring whether an organisation integrates AI in a way that respects its people. <strong>AI People Corp</strong> fills that gap.</p>
+</div></div>
+<div data-lang="fr"><div class="container">
+<p class="section-label">Le problème</p>
+<h2>Tout le monde parle de strategie IA. Presque personne ne parle des <em>personnes</em> qui doivent vivre avec le changement.</h2>
+<div class="stat-block"><span class="stat-number">70%</span><span class="stat-text">des transformations IA échouent. Pas à cause de la technologie. Parce que personne n'a préparé les humains : le leadership, les équipes, la gouvernance, les compétences.</span></div>
+<p>Les entreprises se précipitent pour adopter l'IA sans aligner leurs équipes de direction, sans écouter leurs collaborateurs, sans construire de cadre de gouvernance, sans consulter leurs IRP (institutions representatives du personnel), et sans cascader les compétences dont leurs équipes ont besoin.</p>
+<p>Il n'existe aucun standard reconnu pour mesurer si une entreprise intègre l'IA en respectant ses équipes. <strong>AI People Corp</strong> comble ce vide.</p>
+</div></div>
+<div data-lang="nl"><div class="container">
+<p class="section-label">Het probleem</p>
+<h2>Iedereen praat over AI-strategie. Bijna niemand praat over de <em>mensen</em> die met de verandering moeten leven.</h2>
+<div class="stat-block"><span class="stat-number">70%</span><span class="stat-text">van de AI-transformaties mislukt. Niet vanwege slechte technologie. Omdat niemand de mensen heeft voorbereid: het leiderschap, de teams, de governance, de vaardigheden.</span></div>
+<p>Bedrijven haasten zich om AI-tools te implementeren zonder hun directieteams op een lijn te brengen, zonder hun medewerkers te horen, zonder een governance-kader op te bouwen, zonder de ondernemingsraad te raadplegen, en zonder de vaardigheden door te geven die hun mensen nodig hebben.</p>
+<p>Er bestaat geen erkende standaard om te meten of een organisatie AI integreert op een manier die haar mensen respecteert. <strong>AI People Corp</strong> vult die leemte.</p>
+</div></div>
+</section>
+
+<!-- 7 DIMENSIONS -->
+<section class="dimensions" id="dimensions">
+<div class="dimensions-logo"><div class="logo-badge-mid"><span class="logo-ai">AI</span><span class="logo-people">PEOPLE</span><span class="logo-corp">Corp</span></div></div>
+<div data-lang="en" class="active"><div class="container">
+<div class="dimensions-header"><p class="section-label">The AI People Corp Framework</p><h2><em>7 dimensions</em> of human AI readiness</h2><p class="dimensions-intro">The <strong>AI People Corp</strong> standard measures each dimension across four maturity levels, giving organisations a complete picture of their human AI readiness.</p></div>
+<div class="dimension-grid">
+<div class="dimension-item"><span class="dimension-number">1</span><div class="dimension-content"><h3>Strategic AI Narrative</h3><p>Does your leadership team have a clear, honest answer to "why are we doing this?" beyond "because everyone else is"?</p></div></div>
+<div class="dimension-item"><span class="dimension-number">2</span><div class="dimension-content"><h3>Leadership Posture</h3><p>Is your COMEX aligned, informed, and visibly leading the AI transformation, or delegating it to IT?</p></div></div>
+<div class="dimension-item"><span class="dimension-number">3</span><div class="dimension-content"><h3>Workforce Sentiment</h3><p>Do you know how your people actually feel about AI? Not what HR assumes. What they actually feel.</p></div></div>
+<div class="dimension-item"><span class="dimension-number">4</span><div class="dimension-content"><h3>Governance &amp; Social Dialogue</h3><p>Have you consulted employee representatives? Built an AI governance framework? Addressed the legal obligations?</p></div></div>
+<div class="dimension-item"><span class="dimension-number">5</span><div class="dimension-content"><h3>Operational Integration</h3><p>Do you know where AI is already being used in your organisation without anyone's permission? Shadow AI is real.</p></div></div>
+<div class="dimension-item"><span class="dimension-number">6</span><div class="dimension-content"><h3>Skills Cascade</h3><p>Are you building AI literacy across all levels, or is training limited to the IT department?</p></div></div>
+<div class="dimension-item"><span class="dimension-number">7</span><div class="dimension-content"><h3>Ethical Framework &amp; Responsible Transition</h3><p>Do you have a plan for people whose roles will change? Not a redundancy plan. A transition plan.</p></div></div>
+</div></div></div>
+<div data-lang="fr"><div class="container">
+<div class="dimensions-header"><p class="section-label">Le cadre AI People Corp</p><h2><em>7 dimensions</em> de la maturité humaine face à l'IA</h2><p class="dimensions-intro">Le standard <strong>AI People Corp</strong> évalue chaque dimension sur quatre niveaux de maturité, offrant aux organisations une image complète de leur préparation humaine à l'IA.</p></div>
+<div class="dimension-grid">
+<div class="dimension-item"><span class="dimension-number">1</span><div class="dimension-content"><h3>Narratif stratégique IA</h3><p>Votre comite de direction a-t-il une réponse claire et honnête à la question &laquo; pourquoi faisons-nous cela ? &raquo; au-delà de &laquo; parce que tout le monde le fait &raquo; ?</p></div></div>
+<div class="dimension-item"><span class="dimension-number">2</span><div class="dimension-content"><h3>Posture de leadership</h3><p>Votre COMEX est-il aligne, informé et visiblement à la tête de la transformation IA, ou la délègue-t-il à la DSI ?</p></div></div>
+<div class="dimension-item"><span class="dimension-number">3</span><div class="dimension-content"><h3>Sentiment des collaborateurs</h3><p>Savez-vous ce que vos équipes ressentent réellement face a l'IA ? Pas ce que les RH supposent. Ce qu'ils ressentent vraiment.</p></div></div>
+<div class="dimension-item"><span class="dimension-number">4</span><div class="dimension-content"><h3>Gouvernance et dialogue social</h3><p>Avez-vous consulté le CSE ? Mis en place un cadre de gouvernance IA ? Respecté les obligations GPEC et d'information-consultation de vos IRP ?</p></div></div>
+<div class="dimension-item"><span class="dimension-number">5</span><div class="dimension-content"><h3>Intégration opérationnelle</h3><p>Savez-vous ou l'IA est déjà utilisée dans votre organisation sans l'accord de personne ? Le Shadow AI est une réalité.</p></div></div>
+<div class="dimension-item"><span class="dimension-number">6</span><div class="dimension-content"><h3>Cascade de compétences</h3><p>Construisez-vous une littératie IA a tous les niveaux, ou la formation est-elle réservée à la DSI ?</p></div></div>
+<div class="dimension-item"><span class="dimension-number">7</span><div class="dimension-content"><h3>Cadre éthique et transition responsable</h3><p>Avez-vous un plan pour les personnes dont les fonctions vont évoluer ? Pas un plan de restructuration. Un plan de transition.</p></div></div>
+</div></div></div>
+<div data-lang="nl"><div class="container">
+<div class="dimensions-header"><p class="section-label">Het AI People Corp raamwerk</p><h2><em>7 dimensies</em> van menselijke AI-gereedheid</h2><p class="dimensions-intro">De <strong>AI People Corp</strong> standaard meet elke dimensie op vier volwassenheidsniveaus en geeft organisaties een compleet beeld van hun menselijke AI-gereedheid.</p></div>
+<div class="dimension-grid">
+<div class="dimension-item"><span class="dimension-number">1</span><div class="dimension-content"><h3>Strategisch AI-narratief</h3><p>Heeft uw directieteam een helder, eerlijk antwoord op "waarom doen we dit?" voorbij "omdat iedereen het doet"?</p></div></div>
+<div class="dimension-item"><span class="dimension-number">2</span><div class="dimension-content"><h3>Leiderschapshouding</h3><p>Is uw directie afgestemd, geinformeerd en zichtbaar leidend in de AI-transformatie, of delegeert men dit aan IT?</p></div></div>
+<div class="dimension-item"><span class="dimension-number">3</span><div class="dimension-content"><h3>Werknemerssentiment</h3><p>Weet u hoe uw mensen zich echt voelen over AI? Niet wat HR aanneemt. Wat ze werkelijk voelen.</p></div></div>
+<div class="dimension-item"><span class="dimension-number">4</span><div class="dimension-content"><h3>Governance en sociaal overleg</h3><p>Heeft u de ondernemingsraad geraadpleegd? Een AI-governance raamwerk opgebouwd? De wettelijke verplichtingen geadresseerd?</p></div></div>
+<div class="dimension-item"><span class="dimension-number">5</span><div class="dimension-content"><h3>Operationele integratie</h3><p>Weet u waar AI al wordt gebruikt in uw organisatie zonder toestemming? Shadow AI is een realiteit.</p></div></div>
+<div class="dimension-item"><span class="dimension-number">6</span><div class="dimension-content"><h3>Vaardigheidscascade</h3><p>Bouwt u AI-geletterdheid op alle niveaus op, of is training beperkt tot de IT-afdeling?</p></div></div>
+<div class="dimension-item"><span class="dimension-number">7</span><div class="dimension-content"><h3>Ethisch kader en verantwoorde transitie</h3><p>Heeft u een plan voor mensen wiens functies zullen veranderen? Geen reorganisatieplan. Een transitieplan.</p></div></div>
+</div></div></div>
+</section>
+
+<!-- MATURITY LEVELS -->
+<section class="maturity">
+<div data-lang="en" class="active"><div class="container">
+<p class="section-label" style="text-align:center;color:var(--crimson)">The AI People Corp Scale</p>
+<h2><em>4 maturity levels</em></h2>
+<p class="maturity-intro">The <strong>AI People Corp</strong> standard assesses each dimension across four levels.</p>
+<p class="maturity-intro">Most organisations today sit at Level 1 or 2. The framework helps them see where they are and where they need to go.</p>
+<p class="maturity-question">Where does your organisation sit on this scale?</p>
+<div class="maturity-track"><div class="maturity-level level-1"><div class="level-dot">1</div><h4>Unaware</h4><p>No structured approach. AI happens to people, not with them.</p></div><div class="maturity-level level-2"><div class="level-dot">2</div><h4>Reactive</h4><p>Awareness exists but responses are ad hoc and fragmented.</p></div><div class="maturity-level level-3"><div class="level-dot">3</div><h4>Structured</h4><p>Formal processes in place. Leadership engaged. People heard.</p></div><div class="maturity-level level-4"><div class="level-dot">4</div><h4>Integrated</h4><p>Human-centred AI is embedded in culture, strategy, and operations.</p></div></div>
+</div></div>
+<div data-lang="fr"><div class="container">
+<p class="section-label" style="text-align:center;color:var(--crimson)">L'échelle AI People Corp</p>
+<h2><em>4 niveaux de maturité</em></h2>
+<p class="maturity-intro">Le standard <strong>AI People Corp</strong> évalue chaque dimension sur quatre niveaux.</p>
+<p class="maturity-intro">La plupart des organisations se situent aujourd'hui aux Niveaux 1 ou 2. Le cadre les aide à voir où elles en sont et où elles doivent aller.</p>
+<p class="maturity-question">Où se situe votre organisation sur cette échelle ?</p>
+<div class="maturity-track"><div class="maturity-level level-1"><div class="level-dot">1</div><h4>Inconscient</h4><p>Aucune approche structurée. L'IA arrive aux gens, pas avec eux.</p></div><div class="maturity-level level-2"><div class="level-dot">2</div><h4>Reactif</h4><p>La conscience existe mais les réponses sont ponctuelles et fragmentées.</p></div><div class="maturity-level level-3"><div class="level-dot">3</div><h4>Structuré</h4><p>Des processus formels sont en place. Le leadership est engagé. Les collaborateurs sont entendus.</p></div><div class="maturity-level level-4"><div class="level-dot">4</div><h4>Intégré</h4><p>L'IA centrée sur l'humain est ancrée dans la culture, la stratégie et les opérations.</p></div></div>
+</div></div>
+<div data-lang="nl"><div class="container">
+<p class="section-label" style="text-align:center;color:var(--crimson)">De AI People Corp schaal</p>
+<h2><em>4 volwassenheidsniveaus</em></h2>
+<p class="maturity-intro">De <strong>AI People Corp</strong> standaard beoordeelt elke dimensie op vier niveaus.</p>
+<p class="maturity-intro">De meeste organisaties zitten vandaag op Niveau 1 of 2. Het raamwerk helpt hen te zien waar ze staan en waar ze naartoe moeten.</p>
+<p class="maturity-question">Waar staat uw organisatie op deze schaal?</p>
+<div class="maturity-track"><div class="maturity-level level-1"><div class="level-dot">1</div><h4>Onbewust</h4><p>Geen gestructureerde aanpak. AI overkomt mensen, in plaats van met hen.</p></div><div class="maturity-level level-2"><div class="level-dot">2</div><h4>Reactief</h4><p>Bewustzijn bestaat maar reacties zijn ad hoc en gefragmenteerd.</p></div><div class="maturity-level level-3"><div class="level-dot">3</div><h4>Gestructureerd</h4><p>Formele processen aanwezig. Leiderschap betrokken. Mensen gehoord.</p></div><div class="maturity-level level-4"><div class="level-dot">4</div><h4>Geintegreerd</h4><p>Mensgerichte AI is verankerd in cultuur, strategie en operaties.</p></div></div>
+</div></div>
+</section>
+
+<!-- WHO IS THIS FOR -->
+<section class="audience">
+<div data-lang="en" class="active"><div class="container">
+<h2>Who is <em>AI People Corp</em> for?</h2>
+<div class="audience-grid">
+<div class="audience-card"><h3>For Leadership Teams</h3><p>Your board is asking about AI strategy, but nobody has measured whether your organisation is actually ready for the human side of transformation. <strong>AI People Corp</strong> gives you the framework to answer that question with confidence.</p></div>
+<div class="audience-card"><h3>For HR &amp; People Leaders</h3><p>You are being asked to manage a transformation that affects every role in the organisation, with no framework to guide you. <strong>AI People Corp</strong> gives you the structure, the language, and the benchmark to lead from the front.</p></div>
+<div class="audience-card"><h3>For AI &amp; Digital Leaders</h3><p>Your technology roadmap is clear, but workforce adoption is the bottleneck nobody planned for. <strong>AI People Corp</strong> helps you address the human barriers that slow down every implementation.</p></div>
+</div></div></div>
+<div data-lang="fr"><div class="container">
+<h2>À qui s'adresse <em>AI People Corp</em> ?</h2>
+<div class="audience-grid">
+<div class="audience-card"><h3>Pour les directions générales</h3><p>Votre conseil d'administration vous interroge sur la stratégie IA, mais personne n'a mesuré si votre organisation est réellement prête pour le côté humain de la transformation. <strong>AI People Corp</strong> vous donne le cadre pour répondre à cette question en toute confiance.</p></div>
+<div class="audience-card"><h3>Pour les DRH et responsables RH</h3><p>On vous demande de piloter une transformation qui impacte chaque poste de l'organisation, sans cadre pour vous guider. Consultation du CSE, obligations GPEC, dialogue avec les partenaires sociaux : <strong>AI People Corp</strong> vous donne la structure, le langage et le benchmark pour mener de l'avant.</p></div>
+<div class="audience-card"><h3>Pour les directeurs IA et digital</h3><p>Votre feuille de route technologique est claire, mais l'adoption par les équipes est le goulot d'étranglement que personne n'a anticipé. <strong>AI People Corp</strong> vous aide à lever les freins humains qui ralentissent chaque implémentation.</p></div>
+</div></div></div>
+<div data-lang="nl"><div class="container">
+<h2>Voor wie is <em>AI People Corp</em>?</h2>
+<div class="audience-grid">
+<div class="audience-card"><h3>Voor directieteams</h3><p>Uw raad van bestuur vraagt naar AI-strategie, maar niemand heeft gemeten of uw organisatie werkelijk klaar is voor de menselijke kant van transformatie. <strong>AI People Corp</strong> geeft u het raamwerk om die vraag met vertrouwen te beantwoorden.</p></div>
+<div class="audience-card"><h3>Voor HR-directeuren</h3><p>U wordt gevraagd een transformatie te leiden die elke functie in de organisatie raakt, zonder raamwerk om u te begeleiden. Raadpleging van de ondernemingsraad, sociaal overleg : <strong>AI People Corp</strong> geeft u de structuur, de taal en de benchmark om voorop te lopen.</p></div>
+<div class="audience-card"><h3>Voor AI- en digitale leiders</h3><p>Uw technologie-roadmap is helder, maar de adoptie door medewerkers is het knelpunt waar niemand op heeft geanticipeerd. <strong>AI People Corp</strong> helpt u de menselijke barrieres aan te pakken die elke implementatie vertragen.</p></div>
+</div></div></div>
+</section>
+
+<!-- FOUNDING MEMBERS -->
+<section class="founding" id="founding">
+<div data-lang="en" class="active"><div class="container">
+<p class="section-label">AI People Corp Founding Members</p>
+<h2>Be a pioneer.<br>Build the standard.</h2>
+<h3>Join the select group shaping the future of human-centred AI integration</h3>
+<p><strong>AI People Corp</strong> is assembling 10 to 15 Founding Members who will shape the first industry standard for human-centred AI. You don't just adopt the standard. You build it. You define it. You own the legacy.</p>
+<div class="founding-features">
+<div class="founding-feature"><h4>Shape the AI People Corp framework</h4><p>Your input directly influences the seven dimensions and maturity levels of the standard.</p></div>
+<div class="founding-feature"><h4>Benchmark with peers</h4><p>Compare your AI readiness with other <strong>AI People Corp</strong> Founding Members in a confidential setting.</p></div>
+<div class="founding-feature"><h4>Early access</h4><p>First to use the assessment framework and first to carry the <strong>AI People Corp</strong> badge.</p></div>
+<div class="founding-feature"><h4>Founding Member badge</h4><p>"<strong>AI People Corp</strong> Founding Member, est. 2026." A signal that you were there first.</p></div>
+</div>
+<p>If your organisation is grappling with the human side of AI and you want to be part of the solution rather than waiting for someone else to define it, we would like to hear from you.</p>
+<a href="mailto:lydik.grynfeltt@hrbridgeconsulting.com?subject=AI%20People%20Corp%20%E2%80%94%20Founding%20Member%20enquiry" class="cta-secondary">BOOK A 20-MINUTE CONVERSATION</a>
+</div></div>
+<div data-lang="fr"><div class="container">
+<p class="section-label">Membres Fondateurs AI People Corp</p>
+<h2>Soyez pionnier.<br>Construisez le standard.</h2>
+<h3>Rejoignez le groupe restreint qui définit l'avenir de l'intégration humaine de l'IA</h3>
+<p><strong>AI People Corp</strong> constitue un groupe de 10 à 15 Membres Fondateurs qui définiront le premier standard industriel pour l'intégration humaine de l'IA. Vous n'adoptez pas le standard. Vous le construisez. Vous le définissez. Vous en êtes les pionniers.</p>
+<div class="founding-features">
+<div class="founding-feature"><h4>Façonnez le cadre AI People Corp</h4><p>Votre contribution influence directement les sept dimensions et les niveaux de maturité du standard.</p></div>
+<div class="founding-feature"><h4>Benchmarkez avec vos pairs</h4><p>Comparez votre maturité IA avec les autres Membres Fondateurs <strong>AI People Corp</strong> dans un cadre confidentiel.</p></div>
+<div class="founding-feature"><h4>Accès prioritaire</h4><p>Les premiers à utiliser le framework d'évaluation et les premiers à porter le badge <strong>AI People Corp</strong>.</p></div>
+<div class="founding-feature"><h4>Badge Membre Fondateur</h4><p>&laquo; <strong>AI People Corp</strong> Membre Fondateur, est. 2026. &raquo; Un signal que vous étiez là dès le début.</p></div>
+</div>
+<p>Si votre organisation est confrontée au côté humain de l'IA et que vous voulez faire partie de la solution plutôt que d'attendre que quelqu'un d'autre la définisse, nous aimerions vous entendre.</p>
+<a href="mailto:lydik.grynfeltt@hrbridgeconsulting.com?subject=AI%20People%20Corp%20%E2%80%94%20Demande%20Membre%20Fondateur" class="cta-secondary">RÉSERVER UN ÉCHANGE DE 20 MINUTES</a>
+</div></div>
+<div data-lang="nl"><div class="container">
+<p class="section-label">AI People Corp Founding Members</p>
+<h2>Wees een pionier.<br>Bouw de standaard.</h2>
+<h3>Sluit u aan bij de selecte groep die de toekomst van mensgerichte AI-integratie vormgeeft</h3>
+<p><strong>AI People Corp</strong> stelt een groep van 10 tot 15 Founding Members samen die de eerste industriestandaard voor mensgerichte AI zullen vormgeven. U adopteert de standaard niet alleen. U bouwt hem. U definieert hem. U bent de pionier.</p>
+<div class="founding-features">
+<div class="founding-feature"><h4>Vorm het AI People Corp raamwerk</h4><p>Uw input beinvloedt direct de zeven dimensies en volwassenheidsniveaus van de standaard.</p></div>
+<div class="founding-feature"><h4>Benchmark met peers</h4><p>Vergelijk uw AI-gereedheid met andere <strong>AI People Corp</strong> Founding Members in een vertrouwelijke setting.</p></div>
+<div class="founding-feature"><h4>Vroege toegang</h4><p>De eersten die het beoordelingsraamwerk gebruiken en de eersten die het <strong>AI People Corp</strong> badge dragen.</p></div>
+<div class="founding-feature"><h4>Founding Member badge</h4><p>"<strong>AI People Corp</strong> Founding Member, est. 2026." Een signaal dat u er als eerste bij was.</p></div>
+</div>
+<p>Als uw organisatie worstelt met de menselijke kant van AI en u wilt deel uitmaken van de oplossing in plaats van te wachten tot iemand anders die definieert, horen we graag van u.</p>
+<a href="mailto:lydik.grynfeltt@hrbridgeconsulting.com?subject=AI%20People%20Corp%20%E2%80%94%20Founding%20Member%20aanvraag" class="cta-secondary">BOEK EEN GESPREK VAN 20 MINUTEN</a>
+</div></div>
+</section>
+
+<!-- ABOUT -->
+<section class="about">
+<div data-lang="en" class="active"><div class="container">
+<p><strong>AI People Corp</strong> is an initiative of <a href="https://www.hrbridgeconsulting.com" target="_blank">HR Bridge Consulting</a>, a cross-border HR transformation consultancy.</p>
+<p class="cities">LONDON &bull; PARIS &bull; AMSTERDAM</p>
+<p style="font-size:0.9rem;color:var(--mid-grey)"><a href="mailto:lydik.grynfeltt@hrbridgeconsulting.com" style="color:var(--mid-grey);text-decoration:none">lydik.grynfeltt@hrbridgeconsulting.com</a></p>
+</div></div>
+<div data-lang="fr"><div class="container">
+<p><strong>AI People Corp</strong> est une initiative de <a href="https://www.hrbridgeconsulting.com" target="_blank">HR Bridge Consulting</a>, cabinet de conseil en transformation RH cross-border.</p>
+<p class="cities">LONDRES &bull; PARIS &bull; AMSTERDAM</p>
+<p style="font-size:0.9rem;color:var(--mid-grey)"><a href="mailto:lydik.grynfeltt@hrbridgeconsulting.com" style="color:var(--mid-grey);text-decoration:none">lydik.grynfeltt@hrbridgeconsulting.com</a></p>
+</div></div>
+<div data-lang="nl"><div class="container">
+<p><strong>AI People Corp</strong> is een initiatief van <a href="https://www.hrbridgeconsulting.com" target="_blank">HR Bridge Consulting</a>, een grensoverschrijdend HR-transformatie adviesbureau.</p>
+<p class="cities">LONDEN &bull; PARIJS &bull; AMSTERDAM</p>
+<p style="font-size:0.9rem;color:var(--mid-grey)"><a href="mailto:lydik.grynfeltt@hrbridgeconsulting.com" style="color:var(--mid-grey);text-decoration:none">lydik.grynfeltt@hrbridgeconsulting.com</a></p>
+</div></div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+<div class="footer-badge"><span class="logo-ai">AI</span><span class="logo-people">PEOPLE</span><span class="logo-corp">Corp</span></div>
+<p>&copy; 2026 <strong>AI People Corp</strong>. An initiative of <a href="https://www.hrbridgeconsulting.com">HR Bridge Consulting</a>. All rights reserved.</p>
+</footer>
+
+<script>
+function setLang(lang) {
+  document.querySelectorAll('[data-lang]').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('[data-lang="'+lang+'"]').forEach(el => el.classList.add('active'));
+  document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+  document.querySelector('.lang-btn[onclick*="'+lang+'"]').classList.add('active');
+  document.documentElement.lang = lang;
+  localStorage.setItem('aipc-lang', lang);
+}
+
+// IP-based auto-detection on first visit
+(function() {
+  var saved = localStorage.getItem('aipc-lang');
+  if (saved) { setLang(saved); return; }
+  try {
+    fetch('https://ipapi.co/json/')
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        var country = (data.country_code || '').toUpperCase();
+        var lang = 'en';
+        if (['FR','MC','BE','LU','CH','MA','TN','DZ','SN','CI','CM','MG','ML','BF','NE','TD','CG','CD','GA','DJ','KM','MU','SC','RE','GP','MQ','GF','YT','PM','WF','PF','NC'].indexOf(country) !== -1) lang = 'fr';
+        if (['NL','SR','AW','CW','SX','BQ'].indexOf(country) !== -1) lang = 'nl';
+        setLang(lang);
+      })
+      .catch(function() {});
+  } catch(e) {}
+})();
+</script>
+</body>
+</html>
