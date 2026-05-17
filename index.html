@@ -25,6 +25,13 @@ body{font-family:'Libre Baskerville',Georgia,serif;color:var(--text);background:
 .lang-btn.active{background:var(--crimson);color:var(--white)}
 .lang-btn:hover:not(.active){background:rgba(185,28,28,0.05)}
 
+
+/* NAV */
+.site-nav{background:var(--white);border-bottom:1px solid rgba(0,0,0,0.06);padding:0.8rem 2rem;position:sticky;top:0;z-index:90}
+.site-nav .container{display:flex;justify-content:center;align-items:center;gap:2rem}
+.site-nav a{font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.8rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-secondary);text-decoration:none;transition:color 0.2s}
+.site-nav a:hover,.site-nav a.active-link{color:var(--crimson)}
+
 /* HERO */
 .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:4rem 2rem;background:var(--white);position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;top:-200px;right:-200px;width:600px;height:600px;border-radius:50%;border:1px solid rgba(185,28,28,0.06);pointer-events:none}
@@ -139,6 +146,14 @@ body{font-family:'Libre Baskerville',Georgia,serif;color:var(--text);background:
 .footer a{color:rgba(255,255,255,0.5);text-decoration:none}
 .footer a:hover{color:var(--white)}
 
+
+/* DIAGNOSTIC CTA */
+.diag-cta{text-align:center;padding:2.5rem 2rem 0;animation:fadeIn 1.2s ease-out 0.6s both}
+.diag-cta p{font-family:'Libre Baskerville',serif;font-size:1.05rem;color:var(--text-secondary);margin-bottom:1rem}
+.diag-cta .cta-primary{font-size:0.85rem;padding:0.9rem 2rem}
+.dim-bottom-cta{text-align:center;margin:2.5rem 0 0;padding:1.5rem 0 0;border-top:1px solid rgba(0,0,0,0.06)}
+.dim-bottom-cta a{font-size:0.85rem;padding:0.9rem 2rem}
+
 @keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 @keyframes bounce{0%,20%,50%,80%,100%{transform:translateX(-50%) translateY(0)}40%{transform:translateX(-50%) translateY(-8px)}60%{transform:translateX(-50%) translateY(-4px)}}
 
@@ -168,6 +183,29 @@ body{font-family:'Libre Baskerville',Georgia,serif;color:var(--text);background:
 <button class="lang-btn" onclick="setLang('nl')">NL</button>
 </div>
 
+
+<!-- NAVIGATION -->
+<nav class="site-nav">
+<div data-lang="en" class="active"><div class="container">
+<a href="#">Home</a>
+<a href="#dimensions">The Standard</a>
+<a href="/diagnostic/">The Diagnostic</a>
+<a href="#founding">Contact</a>
+</div></div>
+<div data-lang="fr"><div class="container">
+<a href="#">Accueil</a>
+<a href="#dimensions">Le Standard</a>
+<a href="/diagnostic/">Le Diagnostic</a>
+<a href="#founding">Contact</a>
+</div></div>
+<div data-lang="nl"><div class="container">
+<a href="#">Home</a>
+<a href="#dimensions">De Standaard</a>
+<a href="/diagnostic/">De Diagnose</a>
+<a href="#founding">Contact</a>
+</div></div>
+</nav>
+
 <!-- HERO (shared visual, text swapped) -->
 <section class="hero">
 <div class="logo-badge">
@@ -182,6 +220,7 @@ body{font-family:'Libre Baskerville',Georgia,serif;color:var(--text);background:
 <p class="hero-measures">7 dimensions, 4 maturity levels</p>
 <p class="hero-question">Is your organisation ready to put people at the centre of its AI transformation?</p>
 <a href="#founding" class="cta-primary">BECOME A FOUNDING MEMBER</a>
+<div class="diag-cta"><p>Assess your organisation's AI maturity in 5 minutes</p><a href="/diagnostic/" class="cta-primary">START THE FREE DIAGNOSTIC &rarr;</a></div>
 </div>
 <div data-lang="fr">
 <h1 class="hero-headline"><strong>AI People Corp</strong> : le premier standard du marché pour une intégration <em>humaine</em> de l'IA en entreprise</h1>
@@ -190,6 +229,7 @@ body{font-family:'Libre Baskerville',Georgia,serif;color:var(--text);background:
 <p class="hero-measures">7 dimensions, 4 niveaux de maturité</p>
 <p class="hero-question">Votre organisation est-elle prête à placer l’humain au centre de sa transformation IA ?</p>
 <a href="#founding" class="cta-primary">DEVENIR MEMBRE FONDATEUR</a>
+<div class="diag-cta"><p>Évaluez la maturité IA de votre organisation en 5 minutes</p><a href="/diagnostic/" class="cta-primary">COMMENCER LE DIAGNOSTIC GRATUIT &rarr;</a></div>
 </div>
 <div data-lang="nl">
 <h1 class="hero-headline"><strong>AI People Corp</strong>: de eerste marktstandaard voor <em>mensgerichte</em> AI-integratie</h1>
@@ -198,6 +238,7 @@ body{font-family:'Libre Baskerville',Georgia,serif;color:var(--text);background:
 <p class="hero-measures">7 dimensies, 4 volwassenheids­niveaus</p>
 <p class="hero-question">Is uw organisatie klaar om mensen centraal te stellen in haar AI-transformatie?</p>
 <a href="#founding" class="cta-primary">WORD FOUNDING MEMBER</a>
+<div class="diag-cta"><p>Beoordeel de AI-volwassenheid van uw organisatie in 5 minuten</p><a href="/diagnostic/" class="cta-primary">START DE GRATIS DIAGNOSE &rarr;</a></div>
 </div>
 <div class="scroll-indicator"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg></div>
 </section>
@@ -240,6 +281,8 @@ body{font-family:'Libre Baskerville',Georgia,serif;color:var(--text);background:
 <div class="dimension-item"><span class="dimension-number">5</span><div class="dimension-content"><h3>Operational Integration</h3><p>Do you know where AI is already being used in your organisation without anyone's permission? Shadow AI is real.</p></div></div>
 <div class="dimension-item"><span class="dimension-number">6</span><div class="dimension-content"><h3>Skills Cascade</h3><p>Is AI training accessible to all employees, or confined to the IT department? Are trainers oriented towards all users?</p></div></div>
 <div class="dimension-item"><span class="dimension-number">7</span><div class="dimension-content"><h3>Ethical Framework &amp; Responsible Transition</h3><p>Does your target operating model integrate AI? How does your organisation bring people along in this evolution rather than leaving them behind?</p></div></div>
+</div>
+<div class="dim-bottom-cta"><a href="/diagnostic/" class="cta-primary">ASSESS YOURSELF ON THESE 7 DIMENSIONS &rarr;</a></div>
 </div></div></div>
 <div data-lang="fr"><div class="container">
 <div class="dimensions-header"><p class="section-label">Le cadre AI People Corp</p><h2><em>7 dimensions</em> de la maturité humaine face à l'IA</h2><p class="dimensions-intro">Le standard <strong>AI People Corp</strong> évalue chaque dimension sur quatre niveaux de maturité, offrant aux organisations une image complète de leur préparation humaine à l'IA.</p></div>
@@ -251,6 +294,8 @@ body{font-family:'Libre Baskerville',Georgia,serif;color:var(--text);background:
 <div class="dimension-item"><span class="dimension-number">5</span><div class="dimension-content"><h3>Intégration opérationnelle</h3><p>Savez-vous ou l'IA est déjà utilisée dans votre organisation sans l'accord de personne ? Le Shadow AI est une réalité.</p></div></div>
 <div class="dimension-item"><span class="dimension-number">6</span><div class="dimension-content"><h3>Cascade de compétences</h3><p>La formation IA est-elle accessible à tous les collaborateurs, ou reste-t-elle cantonnée au département IT ? Les formateurs sont-ils orientés tous utilisateurs ?</p></div></div>
 <div class="dimension-item"><span class="dimension-number">7</span><div class="dimension-content"><h3>Cadre éthique et transition responsable</h3><p>Votre target operating model intègre-t-il l'IA ? Comment votre organisation embarque-t-elle les collaborateurs dans cette évolution plutôt que de les laisser sur le quai ?</p></div></div>
+</div>
+<div class="dim-bottom-cta"><a href="/diagnostic/" class="cta-primary">ÉVALUEZ-VOUS SUR CES 7 DIMENSIONS &rarr;</a></div>
 </div></div></div>
 <div data-lang="nl"><div class="container">
 <div class="dimensions-header"><p class="section-label">Het AI People Corp raamwerk</p><h2><em>7 dimensies</em> van menselijke AI-gereedheid</h2><p class="dimensions-intro">De <strong>AI People Corp</strong> standaard meet elke dimensie op vier volwassenheids­niveaus en geeft organisaties een compleet beeld van hun menselijke AI-gereedheid.</p></div>
@@ -262,6 +307,8 @@ body{font-family:'Libre Baskerville',Georgia,serif;color:var(--text);background:
 <div class="dimension-item"><span class="dimension-number">5</span><div class="dimension-content"><h3>Operationele integratie</h3><p>Weet u waar AI al wordt gebruikt in uw organisatie zonder toestemming? Shadow AI is een realiteit.</p></div></div>
 <div class="dimension-item"><span class="dimension-number">6</span><div class="dimension-content"><h3>Vaardigheidscascade</h3><p>Is AI-training toegankelijk voor alle medewerkers, of beperkt tot de IT-afdeling? Zijn de trainers gericht op alle gebruikers?</p></div></div>
 <div class="dimension-item"><span class="dimension-number">7</span><div class="dimension-content"><h3>Ethisch kader en verantwoorde transitie</h3><p>Integreert uw target operating model AI? Hoe neemt uw organisatie medewerkers mee in deze evolutie in plaats van hen achter te laten?</p></div></div>
+</div>
+<div class="dim-bottom-cta"><a href="/diagnostic/" class="cta-primary">BEOORDEEL UZELF OP DEZE 7 DIMENSIES &rarr;</a></div>
 </div></div></div>
 </section>
 
