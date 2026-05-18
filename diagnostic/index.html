@@ -167,7 +167,10 @@ function applyTranslations(){const t=T[lang];document.getElementById('w-title').
 function showStep(id){document.querySelectorAll('.step').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
 
 document.getElementById('f-consent').addEventListener('change',checkForm);
-['f-name','f-jobtitle','f-email','f-company'].forEach(id=>{document.getElementById(id).addEventListener('input',checkForm);});
+['f-name','f-jobtitle','f-email','f-company'].forEach(id=>{const el=document.getElementById(id);el.addEventListener('input',checkForm);el.addEventListener('change',checkForm);el.addEventListener('blur',checkForm);});
+document.getElementById('f-next').addEventListener('mouseenter',checkForm);
+document.getElementById('f-next').addEventListener('touchstart',checkForm);
+setInterval(checkForm,1000);
 function checkForm(){const ok=document.getElementById('f-name').value.trim()&&document.getElementById('f-jobtitle').value.trim()&&document.getElementById('f-email').value.trim()&&document.getElementById('f-company').value.trim()&&document.getElementById('f-consent').checked;document.getElementById('f-next').disabled=!ok;}
 
 function validateAndStart(){const e=document.getElementById('f-email').value.trim().toLowerCase(),d=e.split('@')[1];if(!d||BLOCKED.includes(d)){document.getElementById('email-error').style.display='block';return;}if(document.getElementById('hp-website').value)return;document.getElementById('email-error').style.display='none';lockLang();formLoadTime=Date.now();currentQ=0;renderQuestion();showStep('step-questions');}
