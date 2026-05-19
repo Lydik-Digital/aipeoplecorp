@@ -210,7 +210,7 @@ breakPoints.push(Math.round(cRect.height));
 // Remove duplicates and sort
 const uniqueBreaks=[...new Set(breakPoints)].sort((a,b)=>a-b);
 
-const canvas=await html2canvas(container,{scale:2,useCORS:true,logging:false,backgroundColor:'#FFF'});
+const cpDiv=container.querySelector('.copyright');if(cpDiv)cpDiv.style.display='none';const canvas=await html2canvas(container,{scale:2,useCORS:true,logging:false,backgroundColor:'#FFF'});if(cpDiv)cpDiv.style.display='';
 const{jsPDF}=window.jspdf;
 const pdf=new jsPDF('p','mm','a4');
 const pw=210,ph=297,ml=12,mr=12;
