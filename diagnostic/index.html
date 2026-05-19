@@ -39,7 +39,7 @@ body{font-family:'Lora',Georgia,serif;color:var(--text);background:var(--off-whi
 .btn-primary{background:var(--red);color:var(--white);}.btn-primary:hover{background:var(--red-dark);}
 .btn-outline{background:none;color:var(--red);border:2px solid var(--red);}.btn-outline:hover{background:var(--red);color:var(--white);}
 .btn-teal{background:var(--teal);color:var(--white);}.btn-teal:hover{background:#0D6B63;}
-.btn:disabled{opacity:0.35;cursor:not-allowed;}.btn.btn-dim{opacity:0.35;cursor:not-allowed;}.form-error{font-size:12px;color:var(--red);margin-top:6px;display:none;font-family:"Poppins",sans-serif;text-align:center;}
+.btn:disabled{opacity:0.35;cursor:not-allowed;}.form-error{font-size:12px;color:var(--red);margin-top:6px;display:none;font-family:"Poppins",sans-serif;text-align:center;}
 .form-card{background:var(--white);border:1px solid var(--gray-200);padding:40px 42px;margin-top:30px;}
 .form-card h2{font-family:'Poppins',sans-serif;font-weight:800;font-size:22px;color:var(--black);margin-bottom:6px;}
 .form-card .form-desc{font-size:14px;color:var(--text-light);margin-bottom:28px;font-style:italic;}
@@ -171,7 +171,7 @@ document.getElementById('f-consent').addEventListener('change',checkForm);
 document.getElementById('f-next').addEventListener('mouseenter',checkForm);
 document.getElementById('f-next').addEventListener('touchstart',checkForm);
 setInterval(checkForm,1000);
-function checkForm(){const ok=document.getElementById('f-firstname').value.trim()&&document.getElementById('f-surname').value.trim()&&document.getElementById('f-email').value.trim()&&document.getElementById('f-consent').checked;const b=document.getElementById('f-next');if(ok){b.classList.remove('btn-dim');}else{b.classList.add('btn-dim');}}
+function checkForm(){}
 
 function validateAndSubmit(){const fn=document.getElementById('f-firstname').value.trim(),sn=document.getElementById('f-surname').value.trim(),em=document.getElementById('f-email').value.trim().toLowerCase(),co=document.getElementById('f-consent').checked,fe=document.getElementById('form-error'),ee=document.getElementById('email-error');fe.style.display='none';ee.style.display='none';if(!fn||!sn||!em||!co){const t=T[lang];fe.textContent=lang==='fr'?'Veuillez remplir tous les champs et accepter les conditions.':lang==='nl'?'Vul alle velden in en accepteer de voorwaarden.':'Please fill in all fields and accept the terms.';fe.style.display='block';return;}const d=em.split('@')[1];if(!d||BLOCKED.includes(d)){ee.style.display='block';return;}if(document.getElementById('hp-website').value)return;calculateResults();}
 
