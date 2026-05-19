@@ -214,7 +214,7 @@ const canvas=await html2canvas(container,{scale:2,useCORS:true,logging:false,bac
 const{jsPDF}=window.jspdf;
 const pdf=new jsPDF('p','mm','a4');
 const pw=210,ph=297,ml=12,mr=12;
-const headerH=18,footerH=12;
+const headerH=18,footerH=28;
 const mt=ml+headerH,mb=ml+footerH;
 const cw=pw-ml-mr;
 const contentH=ph-mt-mb;
@@ -264,7 +264,7 @@ for(let i=0;i<totalPages;i++){
   // Header
   try{pdf.addImage(LOGO_PDF,'JPEG',ml,ml,14,14);}catch(e){}
   pdf.setFont('helvetica','bold');pdf.setFontSize(9);pdf.setTextColor(26,26,26);
-  pdf.text('AI PEOPLE CORP',ml+17,ml+9);
+  pdf.text('AI ',ml+17,ml+9);const aiW=pdf.getTextWidth('AI ');pdf.setTextColor(185,28,28);pdf.text('PEOPLE',ml+17+aiW,ml+9);const pW=pdf.getTextWidth('PEOPLE');pdf.setTextColor(26,26,26);pdf.text(' CORP',ml+17+aiW+pW,ml+9);
   pdf.setFont('helvetica','normal');pdf.setFontSize(7.5);pdf.setTextColor(107,114,128);
   pdf.text(docTitle,pw-mr,ml+9,{align:'right'});
   pdf.setDrawColor(185,28,28);pdf.setLineWidth(0.5);
@@ -274,13 +274,47 @@ for(let i=0;i<totalPages;i++){
   const displayH=Math.min(sliceMmH,contentH);
   pdf.addImage(sliceData,'JPEG',ml,mt,cw,sliceMmH>contentH?contentH:sliceMmH);
 
-  // Footer: red line + copyright + page number
-  const fy=ph-ml-2;
+  // Footer: red line + copyright + links + page number
+  const footerStartY=ph-ml-18;
   pdf.setDrawColor(185,28,28);pdf.setLineWidth(0.3);
-  pdf.line(ml,fy-4,pw-mr,fy-4);
-  pdf.setFont('helvetica','normal');pdf.setFontSize(6.5);pdf.setTextColor(107,114,128);
+  pdf.line(ml,footerStartY,pw-mr,footerStartY);
+  const ffs=6.5;const flh=3.2;let fy=footerStartY+4;
+  // Line 1: copyright AIPC
+  pdf.setFont('helvetica','normal');pdf.setFontSize(ffs);pdf.setTextColor(107,114,128);
   pdf.text(cpLine,ml,fy);
   pdf.text((i+1)+' / '+totalPages,pw-mr,fy,{align:'right'});
+  fy+=flh;
+  // Line 2: copyright HRBC
+  pdf.text('\u00A9 HR Bridge Consulting Ltd 2026 \u00B7 All rights reserved.',ml,fy);
+  fy+=flh+1;
+  // Line 3: Visit aipeoplecorp.org
+  pdf.setFont('helvetica','normal');pdf.setFontSize(ffs);pdf.setTextColor(107,114,128);
+  const visitTxt=lang==='fr'?'Visitez ':lang==='nl'?'Bezoek ':'Visit ';
+  pdf.text(visitTxt,ml,fy);const vtW=pdf.getTextWidth(visitTxt);
+  pdf.setFont('helvetica','bold');pdf.setTextColor(26,26,26);
+  pdf.text('aipeoplecorp.org',ml+vtW,fy);
+  pdf.link(ml+vtW,fy-2.5,pdf.getTextWidth('aipeoplecorp.org'),3.5,{url:'https://aipeoplecorp.org'});
+  fy+=flh;
+  // Line 4: Advisory services: mentatpartners.ai
+  pdf.setFont('helvetica','normal');pdf.setFontSize(ffs);pdf.setTextColor(107,114,128);
+  const advTxt=lang==='fr'?'Conseil : ':lang==='nl'?'Advies: ':'Advisory: ';
+  pdf.text(advTxt,ml,fy);const adW=pdf.getTextWidth(advTxt);
+  pdf.setFont('helvetica','bold');pdf.setTextColor(185,28,28);
+  pdf.text('mentatpartners.ai',ml+adW,fy);
+  pdf.link(ml+adW,fy-2.5,pdf.getTextWidth('mentatpartners.ai'),3.5,{url:'https://mentatpartners.ai'});
+  fy+=flh;
+  // Line 5: Contact us: phone / email
+  pdf.setFont('helvetica','normal');pdf.setFontSize(ffs);pdf.setTextColor(107,114,128);
+  const conTxt=lang==='fr'?'Contactez-nous : ':lang==='nl'?'Neem contact op: ':'Contact us: ';
+  pdf.text(conTxt,ml,fy);const coW=pdf.getTextWidth(conTxt);
+  pdf.setFont('helvetica','normal');pdf.setTextColor(107,114,128);
+  const phone='+44 79 4974 2878';
+  pdf.text(phone,ml+coW,fy);const phW=pdf.getTextWidth(phone);
+  pdf.link(ml+coW,fy-2.5,phW,3.5,{url:'tel:+447949742878'});
+  pdf.text(' / ',ml+coW+phW,fy);const slW=pdf.getTextWidth(' / ');
+  const email='lydik.grynfeltt@hrbridgeconsulting.com';
+  pdf.text(email,ml+coW+phW+slW,fy);
+  pdf.link(ml+coW+phW+slW,fy-2.5,pdf.getTextWidth(email),3.5,{url:'mailto:lydik.grynfeltt@hrbridgeconsulting.com'});
 }
 
 pdf.save('AIPC-Diagnostic-'+nm2.replace(/[^a-zA-Z0-9]/g,'-')+'-'+today.toISOString().split('T')[0]+'.pdf');
