@@ -89,7 +89,7 @@ body{font-family:'Lora',Georgia,serif;color:var(--text);background:var(--off-whi
 .score-ring .of{font-family:'Poppins',sans-serif;font-size:10px;opacity:0.8;}
 .overall-text h3{font-family:'Poppins',sans-serif;font-size:16px;font-weight:700;color:var(--black);margin-bottom:6px;}
 .overall-text p{font-size:13px;line-height:1.7;}
-.chart-wrap{max-width:420px;margin:0 auto 35px;}
+.chart-wrap{max-width:295px;margin:0 auto 20px;}
 .section-title{font-family:'Poppins',sans-serif;font-weight:800;font-size:18px;color:var(--black);margin:40px 0 18px;padding-bottom:8px;border-bottom:3px solid var(--red);text-transform:uppercase;letter-spacing:1px;}
 .dim-result{margin-bottom:18px;padding:18px 20px;border:1px solid var(--gray-200);}
 .dim-result-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
@@ -215,7 +215,8 @@ const breakPoints=[0];
 const sections=container.querySelectorAll('.results-header,.overall-block,.chart-wrap,.section-title,.dim-result,.tri-card,.aipc-block,.cta-block,.disclaimer,.copyright');
 sections.forEach(el=>{
   const r=el.getBoundingClientRect();
-  breakPoints.push(Math.round(r.top-cRect.top));
+  const mt=parseFloat(getComputedStyle(el).marginTop)||0;
+  breakPoints.push(Math.round(r.top-cRect.top-mt));
 });
 breakPoints.push(Math.round(cRect.height));
 const uniqueBreaks=[...new Set(breakPoints)].sort((a,b)=>a-b);
