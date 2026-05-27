@@ -472,7 +472,7 @@ function setLang(lang) {
 })();
 
 // === Formspree Contact Form Handler ===
-(function(){document.querySelectorAll('.aipc-contact-form').forEach(function(f){f.addEventListener('submit',function(e){e.preventDefault();var b=f.querySelector('.cf-submit-btn');b.disabled=true;fetch(f.action,{method:'POST',body:new FormData(f),headers:{Accept:'application/json'}}).then(function(r){if(r.ok){f.style.display='none';var s=f.nextElementSibling;if(s&&s.classList.contains('cf-success')){s.style.display='block';}}else{b.disabled=false;}}).catch(function(){b.disabled=false;});});});})();
+(function(){var forms=document.querySelectorAll('.aipc-contact-form');console.log('Main page: found',forms.length,'contact forms');forms.forEach(function(f){f.addEventListener('submit',function(e){e.preventDefault();console.log('Main form submit fired, action:',f.action);var b=f.querySelector('.cf-submit-btn');var origText=b.textContent;b.disabled=true;b.textContent='...';fetch(f.action,{method:'POST',body:new FormData(f),headers:{'Accept':'application/json'}}).then(function(r){console.log('Main form response:',r.status,r.ok);if(r.ok){f.style.display='none';var s=f.nextElementSibling;if(s&&s.classList.contains('cf-success')){s.style.display='block';}}else{b.disabled=false;b.textContent=origText;alert('Form error ('+r.status+'). Please try again.');}}).catch(function(err){console.error('Form error:',err);b.disabled=false;b.textContent=origText;alert('Network error. Please check your connection and try again.');});});});})();
 </script>
 </body>
 </html>
