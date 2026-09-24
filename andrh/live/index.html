@@ -9,7 +9,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script src="../config.js?v=2"></script>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Nunito+Sans:wght@400;700;800;900&display=swap');
 :root{--red:#B91C1C;--red-dark:#991B1B;--red-light:#FEE2E2;--red-bg:#FEF2F2;--black:#1A1A1A;--text:#333;--muted:#6B7280;--white:#FFF;--off:#FAF8F5;--g100:#F3F4F6;--g200:#E5E7EB;--g300:#D1D5DB;
 --l1:#B91C1C;--l2:#D97706;--l3:#1D4ED8;--l4:#15803D;--pme:#1D4ED8;--eti:#D97706;--gg:#7C3AED;--amber:#B07020;}
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -184,6 +184,30 @@ h1.t em{font-style:normal;color:var(--red);}
 .admin .help{font-family:'Poppins',sans-serif;font-size:.72vw;color:var(--muted);line-height:1.6;margin-top:1vh;}
 .admin .msg{font-family:'Poppins',sans-serif;font-size:.8vw;color:var(--red);min-height:2vh;}
 .sr{position:absolute;left:-9999px;}
+/* ---- écran Claude (charte Mentat Partners) ---- */
+.mp-screen{background:#FAF7F2;font-family:'Nunito Sans','Segoe UI',Arial,sans-serif;color:#2C2C2A;}
+.mp-screen .kicker{font-family:'Nunito Sans',sans-serif;color:#B07020;font-weight:800;letter-spacing:.22em;}
+.mp-screen h1.t{font-family:'Nunito Sans',sans-serif;font-weight:900;color:#2C2C2A;}
+.mp-screen h1.t em{color:#B07020;}
+.mp-screen .lede{font-family:'Nunito Sans',sans-serif;font-style:normal;color:#6B6B68;}
+.mp-screen .rule{background:#B07020;}
+.mp-wrap{display:grid;grid-template-columns:1.1fr 1fr;gap:4vw;flex:1;min-height:0;align-items:start;}
+.mp-steps{display:flex;flex-direction:column;gap:2.4vh;}
+.mp-step{display:grid;grid-template-columns:3.6vw 1fr;gap:1vw;align-items:start;}
+.mp-step .no{font-weight:900;font-size:2.4vw;color:#B07020;line-height:1;}
+.mp-step b{display:block;font-weight:800;font-size:1.35vw;}
+.mp-step span{display:block;color:#6B6B68;font-size:1.02vw;margin-top:.5vh;line-height:1.45;}
+.mp-card{background:#fff;border:1px solid #E8DFD0;border-top:4px solid #B07020;padding:3vh 2vw;}
+.mp-card h3{font-weight:900;font-size:1.3vw;margin-bottom:1.6vh;}
+.mp-card li{list-style:none;padding:1vh 0;border-bottom:1px solid #F0E8DA;font-size:1.05vw;display:flex;gap:.8vw;align-items:baseline;}
+.mp-card li::before{content:'';width:.55vw;height:.55vw;min-width:.55vw;background:#B07020;display:inline-block;transform:translateY(-.1vw);}
+.mp-btn{font-family:'Nunito Sans',sans-serif;font-weight:900;font-size:1.3vw;background:#B07020;color:#fff;border:none;padding:2vh 2.4vw;cursor:pointer;margin-top:3.4vh;display:inline-flex;align-items:center;gap:.8vw;}
+.mp-btn:hover{background:#8A5718;}
+.mp-btn.done{background:#2C2C2A;}
+.mp-msg{font-size:1vw;color:#8A5718;margin-top:1.6vh;min-height:2.6vh;font-weight:700;}
+.mp-fallback{display:none;width:100%;height:12vh;margin-top:1vh;font-size:.7vw;}
+.mp-brand{position:absolute;top:3vh;right:4vw;display:flex;align-items:center;gap:.6vw;font-family:'Nunito Sans',sans-serif;font-weight:800;color:#B07020;font-size:1vw;}
+.mp-brand svg{width:2.4vw;}
 </style>
 </head>
 <body>
@@ -208,6 +232,7 @@ h1.t em{font-style:normal;color:var(--red);}
   <h3>Réglages <button onclick="toggleAdmin()">×</button></h3>
   <div class="row"><button class="btn ghost" onclick="startTimer(10)">Chrono 10 min</button><button class="btn ghost" onclick="stopTimer()">Arrêter chrono</button><button class="btn ghost" onclick="fullscreen()">Plein écran</button></div>
   <div class="row"><button class="btn ghost" onclick="exportCSV()">Exporter (CSV anonyme)</button><label class="btn ghost" style="display:inline-block">Importer un fichier<input type="file" class="sr" accept=".csv,.json" onchange="importFile(this)"></label></div>
+  <div class="row"><button class="btn ghost" onclick="copyForClaude(null);document.getElementById('admin-msg').textContent='Copié pour Claude ('+rows.length+' réponses).'">Copier pour Claude</button></div>
   <div class="row"><button class="btn ghost" onclick="toggleDemo()" id="demo-btn">Données de démo : non</button></div>
   <div class="row"><button class="btn danger" onclick="resetAll()">Effacer toutes les réponses…</button></div>
   <div class="msg" id="admin-msg"></div>
@@ -462,12 +487,110 @@ add('ensemble',function(el,entering){
   radar=new Chart(document.getElementById('radar'),{type:'radar',data:{labels:DSH,datasets:ds},options:{responsive:true,maintainAspectRatio:false,animation:{duration:700},plugins:{legend:{display:false},tooltip:{titleFont:{family:'Poppins'},bodyFont:{family:'Poppins'},callbacks:{label:c=>c.dataset.label+' : '+String(c.raw).replace('.',',')}}},scales:{r:{min:0,max:5,ticks:{stepSize:1,font:{size:fs*0.8,family:'Poppins'},color:'#9CA3AF',backdropColor:'transparent'},grid:{color:'#D1D5DB'},angleLines:{color:'#D1D5DB'},pointLabels:{font:{size:fs*1.25,family:'Poppins',weight:'700'},color:'#1A1A1A',padding:14}}}}});
 });
 
-// S13 · merci
+// S13 · Claude lit la salle (charte Mentat Partners)
+add('claude',function(el){
+  el.classList.add('mp-screen');
+  if(!el.dataset.built){
+    el.innerHTML='<div class="mp-brand"><svg viewBox="0 0 64 32"><path d="M8 16c0-6 5-10 11-10 9 0 17 20 26 20 6 0 11-4 11-10S51 6 45 6c-9 0-17 20-26 20C13 26 8 22 8 16z" fill="none" stroke="#B07020" stroke-width="4"/></svg>Mentat Partners</div>'+
+    header('Démonstration en direct','Et si l\'on demandait à <em>Claude</em> de lire la salle ?','Vos réponses anonymes, analysées en direct par un modèle d\'IA générative')+
+    '<div class="mp-wrap"><div><div class="mp-steps">'+
+      '<div class="mp-step"><div class="no">01</div><div><b>On copie les réponses de la salle</b><span>Anonymes : secteur, taille, scores, freins. Aucun nom, aucun email.</span></div></div>'+
+      '<div class="mp-step"><div class="no">02</div><div><b>On les confie à Claude</b><span>Avec une consigne d\'analyste : croiser, regrouper, hiérarchiser, sans rien inventer.</span></div></div>'+
+      '<div class="mp-step"><div class="no">03</div><div><b>Claude construit la restitution</b><span>Analyse et mise en forme, en moins de deux minutes.</span></div></div>'+
+    '</div><button class="mp-btn" onclick="copyForClaude(this)">⧉ Copier les réponses pour Claude</button><div class="mp-msg" id="cl-msg"></div><textarea class="mp-fallback" id="cl-fallback" readonly></textarea></div>'+
+    '<div class="mp-card"><h3>Ce que Claude va chercher</h3><ul><li>Les peurs essentielles, regroupées par thème</li><li>Les zones d\'avance et de retard de la salle</li><li>Les zones d\'impréparation : social, réglementaire, adoption</li><li>Le paradoxe que les chiffres révèlent</li><li>Les parcours différents selon la maturité et la taille</li><li>Les 5 questions essentielles pour un DRH</li></ul></div></div>';
+    el.dataset.built='1';
+  }
+});
+
+// S14 · merci
 add('merci',function(el){
   if(el.dataset.built)return;el.dataset.built='1';
   el.innerHTML='<div class="closing"><div><div class="kicker">Et maintenant ?</div><div class="quote">L\'IA ne se déploie pas dans un logiciel.<br>Elle se déploie dans une organisation humaine.</div><div class="who"><b>Votre rapport personnel</b> : téléchargé sur votre téléphone ou envoyé par email.<br><b>Lydik Grynfeltt</b> &amp; <b>Guillaume Vigneron</b> · <span class="mp">Mentat Partners</span> · mentatpartners.ai<br>Le standard <b style="color:var(--red)">AI People Corp</b> · aipeoplecorp.org</div></div><div class="qrbox"><div id="qr2" style="width:14vw;height:14vw"></div><div class="qr-url" style="font-size:1vw">mentatpartners.ai</div></div></div>';
   try{new QRCode(document.getElementById('qr2'),{text:'https://mentatpartners.ai',width:400,height:400,colorDark:'#1A1A1A',colorLight:'#FFFFFF'});const im=document.querySelectorAll('#qr2 img,#qr2 canvas');im.forEach(x=>{x.style.width='100%';x.style.height='100%';});}catch(e){}
 });
+
+// ---------- Analyse Claude : construction de la consigne + données anonymes ----------
+const MENTAT_TEMPLATE="<!DOCTYPE html>\n<html lang=\"fr\">\n<head>\n<meta charset=\"UTF-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n<title>Ce que la salle nous dit<\/title>\n<style>\n@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800;900&display=swap');\n:root{--amber:#B07020;--amber-d:#8A5718;--ink:#2C2C2A;--grey:#6B6B68;--cream:#FAF7F2;--line:#E8DFD0;--soft:#F3EBDD;--white:#FFFFFF;}\n*{margin:0;padding:0;box-sizing:border-box;}\nhtml,body{height:100%;background:var(--cream);}\nbody{font-family:'Nunito Sans','Segoe UI',Helvetica,Arial,sans-serif;color:var(--ink);overflow:hidden;}\n.deck{position:fixed;inset:0;}\n.slide{position:absolute;inset:0;padding:7vh 6vw 12vh;display:none;flex-direction:column;}\n.slide.on{display:flex;animation:in .45s ease;}\n@keyframes in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}\n.brand{position:fixed;top:3vh;right:4vw;display:flex;align-items:center;gap:.7vw;font-weight:800;font-size:clamp(12px,1.15vw,20px);color:var(--amber);z-index:5;}\n.brand svg{width:2.6vw;min-width:24px;height:auto;}\n.kick{font-weight:800;font-size:clamp(11px,1.05vw,17px);letter-spacing:.22em;text-transform:uppercase;color:var(--amber);}\nh1{font-weight:900;font-size:clamp(28px,3.6vw,64px);line-height:1.08;margin-top:1.2vh;color:var(--ink);}\nh1 em{font-style:normal;color:var(--amber);}\n.lead{font-size:clamp(15px,1.6vw,28px);color:var(--grey);margin-top:2vh;max-width:72vw;line-height:1.45;}\n.rule{width:6vw;height:5px;background:var(--amber);margin:2.6vh 0 0;}\n.grid,.bars,.qs,.body{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;}\n.grid{display:grid;gap:2.2vw;align-content:center;}\n.g2{grid-template-columns:1fr 1fr;}.g3{grid-template-columns:repeat(3,1fr);}\n.card{background:var(--white);border:1px solid var(--line);border-top:5px solid var(--amber);padding:4vh 2vw;}\n.card h3{font-weight:800;font-size:clamp(16px,1.8vw,32px);line-height:1.2;margin-top:.6vh;}\n.card p{font-size:clamp(13px,1.3vw,22px);color:var(--grey);line-height:1.5;margin-top:1.4vh;}\n.big{font-weight:900;font-size:clamp(36px,5.2vw,92px);color:var(--amber);line-height:1;}\n.big small{font-size:.35em;color:var(--grey);font-weight:700;margin-left:.3vw;}\n.tag{display:inline-block;font-weight:800;font-size:clamp(10px,.9vw,15px);letter-spacing:.12em;text-transform:uppercase;padding:.5vh .7vw;border:1.5px solid var(--amber);color:var(--amber-d);margin-bottom:1.2vh;}\n.tag.hot{background:var(--amber);color:var(--white);}\n.bars{gap:3.6vh;}\n.bar{display:grid;grid-template-columns:27vw 1fr 6vw;gap:1.6vw;align-items:center;}\n.bar b{font-weight:800;font-size:clamp(15px,1.65vw,28px);}\n.bar b span{display:block;font-weight:400;font-size:clamp(11px,1.02vw,17px);color:var(--grey);margin-top:.4vh;}\n.track{height:3.8vh;background:var(--soft);}\n.fill{height:100%;background:var(--amber);}\n.fill.d{background:var(--amber-d);}.fill.l{background:#D9B98A;}\n.val{font-weight:900;font-size:clamp(18px,2.1vw,36px);text-align:right;}\n.col h2{font-weight:900;font-size:clamp(17px,1.9vw,32px);padding-bottom:1.2vh;border-bottom:4px solid var(--amber);margin-bottom:1vh;}\n.item{display:grid;grid-template-columns:1fr auto;gap:.5vh 1.2vw;padding:2.3vh 0;border-bottom:1px solid var(--line);}\n.item b{font-weight:800;font-size:clamp(15px,1.55vw,26px);}\n.item span{grid-column:1;font-size:clamp(12px,1.15vw,19px);color:var(--grey);line-height:1.45;}\n.item i{grid-row:1/3;grid-column:2;font-style:normal;font-weight:900;font-size:clamp(22px,2.7vw,46px);color:var(--amber);align-self:center;}\n.quote{font-weight:800;font-size:clamp(24px,3vw,52px);line-height:1.28;border-left:7px solid var(--amber);padding-left:2.2vw;max-width:78vw;margin-top:6vh;}\n.facts{display:flex;gap:4vw;margin-top:7vh;}\n.fact{border-top:4px solid var(--amber);padding-top:1.8vh;max-width:26vw;}\n.fact p{font-size:clamp(13px,1.3vw,22px);color:var(--grey);margin-top:1vh;line-height:1.45;}\n.qs{list-style:none;counter-reset:q;gap:3.2vh;}\n.qs li{counter-increment:q;display:grid;grid-template-columns:5vw 1fr;align-items:baseline;font-weight:800;font-size:clamp(17px,1.95vw,34px);line-height:1.28;}\n.qs li::before{content:counter(q,decimal-leading-zero);font-weight:900;color:var(--amber);font-size:.9em;}\n.qs li span{grid-column:2;display:block;font-weight:400;font-size:.6em;color:var(--grey);margin-top:.6vh;}\n.cover{justify-content:center;}\n.cover h1{font-size:clamp(36px,5.8vw,100px);}\n.cover .n{margin-top:6vh;display:flex;gap:5vw;}\n.cover .n p{font-size:clamp(13px,1.2vw,20px);color:var(--grey);margin-top:.8vh;}\n.nav{position:fixed;left:6vw;right:6vw;bottom:3vh;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--line);padding-top:1.4vh;font-size:clamp(11px,.85vw,14px);color:var(--grey);}\n.dots{display:flex;gap:.5vw;}\n.dots button{width:10px;height:10px;border-radius:50%;border:none;background:var(--line);cursor:pointer;}\n.dots button.on{background:var(--amber);width:28px;border-radius:6px;}\n.arrows button{font:inherit;font-weight:800;background:var(--white);border:1.5px solid var(--line);color:var(--ink);padding:.6vh 1vw;cursor:pointer;margin-left:.4vw;}\n.arrows button:hover{border-color:var(--amber);color:var(--amber);}\n<\/style>\n<\/head>\n<body>\n<div class=\"brand\"><svg viewBox=\"0 0 64 32\" aria-hidden=\"true\"><path d=\"M8 16c0-6 5-10 11-10 9 0 17 20 26 20 6 0 11-4 11-10S51 6 45 6c-9 0-17 20-26 20C13 26 8 22 8 16z\" fill=\"none\" stroke=\"#B07020\" stroke-width=\"4\"/><\/svg>Mentat Partners<\/div>\n<div class=\"deck\" id=\"deck\">\n<!-- CONTENU : une <section class=\"slide\"> par écran -->\n<\/div>\n<div class=\"nav\"><div class=\"dots\" id=\"dots\"><\/div><div id=\"pg\"><\/div><div class=\"arrows\"><button onclick=\"go(i-1)\">←<\/button><button onclick=\"go(i+1)\">→<\/button><\/div><\/div>\n<script>\nvar S=[].slice.call(document.querySelectorAll('.slide')),i=0,D=document.getElementById('dots');\nS.forEach(function(_,k){var b=document.createElement('button');b.onclick=function(){go(k)};D.appendChild(b);});\nfunction go(k){if(k<0||k>=S.length)return;i=k;S.forEach(function(s,j){s.classList.toggle('on',j===k)});[].forEach.call(D.children,function(b,j){b.classList.toggle('on',j===k)});document.getElementById('pg').textContent=(k+1)+' / '+S.length;}\ndocument.addEventListener('keydown',function(e){if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();go(i+1)}if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();go(i-1)}});\ngo(0);\n<\/script>\n<\/body>\n<\/html>\n";
+function buildClaudeData(){
+  const n=rows.length,A=agg();
+  const cntBy=(f)=>{const o={};rows.forEach(r=>{const k=f(r);o[k]=(o[k]||0)+1;});return o;};
+  const lv=[0,0,0,0];rows.forEach(r=>lv[r.lv]++);
+  const dims=[...Array(7)].map((_,d)=>{
+    const vals=rows.map(r=>r.ds[d]);const rep=[0,0,0,0];vals.forEach(v=>rep[getLevel(v)]++);
+    return {code:'D'+(d+1),nom:DIMS[d].replace(/^D\d — /,''),moyenne:r1(mean(vals)),repartition_niveaux:Object.fromEntries(LEVELS.map((l,i)=>[l,rep[i]])),
+      affirmations:[2*d,2*d+1].map(q=>{const av=rows.map(r=>r.a[q]);return {texte:QTEXT[q],moyenne:r1(mean(av)),pct_accord:pct(av.filter(x=>x>=4).length,n),pct_desaccord:pct(av.filter(x=>x<=2).length,n)};})};
+  });
+  const parTaille={};GROUPS.forEach(g=>{const gr=groupRows(g.k);if(gr.length>=MIN_N)parTaille[g.k]={n:gr.length,score_moyen:r1(mean(gr.map(r=>r.ov))),dimensions:Object.fromEntries([...Array(7)].map((_,d)=>['D'+(d+1),r1(mean(gr.map(r=>r.ds[d])))]))};});
+  const parNiveau={};LEVELS.forEach((l,i)=>{const gr=rows.filter(r=>r.lv===i);if(gr.length>=MIN_N)parNiveau[l]={n:gr.length,dimensions:Object.fromEntries([...Array(7)].map((_,d)=>['D'+(d+1),r1(mean(gr.map(r=>r.ds[d])))]))};});
+  const schemas=TRI.fr.map(tr=>({nom:tr.name,type:tr.type==='warn'?'alerte':tr.type==='pos'?'positif':'signal',part_de_la_salle_pct:pct(rows.filter(r=>{try{return tr.test(r.ds);}catch(e){return false;}}).length,n),description:tr.text})).filter(x=>x.part_de_la_salle_pct>0).sort((a,b)=>b.part_de_la_salle_pct-a.part_de_la_salle_pct);
+  const secteurs=cntBy(r=>r.sector);
+  return {
+    evenement:'ANDRH 78 · Soirée IA & RH · Littler Paris · 24 septembre 2026',
+    nombre_repondants:n,
+    score_moyen_salle:r1(A.ov),
+    niveaux_maturite:Object.fromEntries(LEVELS.map((l,i)=>[l,lv[i]])),
+    groupes_taille:Object.fromEntries(GROUPS.map(g=>[g.k,groupRows(g.k).length])),
+    secteurs:secteurs,
+    dimensions:dims,
+    moyennes_par_taille_n3plus:parTaille,
+    moyennes_par_niveau_n3plus:parNiveau,
+    schemas_AIPC_declenches:schemas,
+    reponses_individuelles_anonymes:rows.map(r=>({secteur:(secteurs[r.sector]||0)>=MIN_N?r.sector:'Autres secteurs',taille:r.grp||'?',niveau:LEVELS[r.lv],score:r.ov,dims:r.ds,frein:(r.word||'').trim()}))
+  };
+}
+function buildClaudePrompt(){
+  const data=buildClaudeData();
+  const L=[];
+  L.push("Tu es l'analyste de Mentat Partners, cabinet de conseil dédié au volet humain de la transformation IA.");
+  L.push("");
+  L.push("CONTEXTE");
+  L.push("Soirée ANDRH 78 (association des DRH des Yvelines), 24 septembre 2026, chez Littler Paris, sur le thème IA et RH. Animation : Lydik Grynfeltt et Guillaume Vigneron (Mentat Partners). Il y a quelques minutes, les participants (DRH et responsables RH) ont répondu sur leur téléphone au diagnostic AI People Corp : 14 affirmations notées de 1 (pas du tout d'accord) à 5 (tout à fait d'accord), 2 par dimension, sur 7 dimensions humaines de la transformation IA ; plus leur secteur, la taille de leur organisation, et leur « principal frein à l'IA dans vos RH » en un ou deux mots (facultatif). Niveaux de maturité AIPC : score ≤ 2 Inconscient, ≤ 3 Réactif, ≤ 4 Structuré, > 4 Intégré. Les données ci-dessous sont anonymes.");
+  L.push("");
+  L.push("MISSION");
+  L.push("Produire la restitution analytique qui sera projetée devant la salle et commentée en direct. Elle doit montrer aux DRH : les questions essentielles, les peurs essentielles, les zones d'impréparation, les zones d'avance et de retard, et le fait que chacun est à une étape différente du parcours IA (il n'y a pas de mauvais point de départ).");
+  L.push("");
+  L.push("RÈGLES D'ANALYSE");
+  L.push("1. Chaque affirmation s'appuie sur les données fournies et cite un chiffre (%, moyenne sur 5, effectif). N'invente aucun chiffre, aucune citation, aucune statistique extérieure.");
+  L.push("2. Freins : regroupe les réponses libres en 3 à 5 thèmes (synonymes, fautes de frappe, formulations proches). Pour chaque thème : part des réponses libres non vides, 2 ou 3 mots cités tels quels, et le profil qui le cite le plus (niveau ou taille) seulement si le signal est net.");
+  L.push("3. Croise les données : freins × niveau de maturité, dimensions × taille, écart entre les deux affirmations d'une même dimension (l'intention vs la réalité), schémas AIPC les plus fréquents.");
+  L.push("4. Ne décris jamais un groupe de moins de 3 personnes et ne permets jamais d'identifier un individu. Signale les effectifs faibles.");
+  L.push("5. Relie au contexte français quand c'est justifié par les données : consultation du CSE, dialogue social, AI Act, RGPD, shadow AI.");
+  L.push("6. Style : français, vouvoiement, direct, sans jargon. Textes très courts (25 mots maximum par bloc). Aucun tiret cadratin ou demi-cadratin dans le texte visible : utilise « : » ou « · ».");
+  L.push("7. Si moins de 10 réponses, dis-le sur la couverture et reste prudent dans les conclusions.");
+  L.push("");
+  L.push("FORMAT DE SORTIE");
+  L.push("Crée UN SEUL artefact HTML autonome. Reprends EXACTEMENT le gabarit fourni plus bas (CSS, bandeau Mentat Partners, navigation et script inchangés). Remplace uniquement le commentaire <!-- CONTENU --> dans <div class=\"deck\"> par exactement 8 éléments <section class=\"slide\">, dans cet ordre, en utilisant uniquement les classes du gabarit. Les largeurs de barres (.fill style=\"width:XX%\") doivent refléter les vrais chiffres. Aucune image externe, aucune bibliothèque. Après l'artefact, une seule phrase, rien d'autre.");
+  L.push("");
+  L.push("LES 8 ÉCRANS");
+  L.push("1. Couverture : <section class=\"slide cover\"><div class=\"kick\">ANDRH 78 · Littler · 24 septembre 2026</div><h1>Ce que <em>la salle</em> nous dit</h1><div class=\"lead\">[l'enseignement principal en une phrase]</div><div class=\"n\"><div><div class=\"big\">[N]</div><p>DRH ont répondu</p></div><div><div class=\"big\">[score]<small>/ 5</small></div><p>score moyen de la salle</p></div><div><div class=\"big\">[x %]</div><p>[au niveau le plus fréquent]</p></div></div></section>");
+  L.push("2. Les 3 enseignements clés : kick + h1 + div.rule puis <div class=\"grid g3\"> avec 3 <div class=\"card\"><div class=\"big\">[chiffre]</div><h3>[enseignement]</h3><p>[lecture]</p></div>.");
+  L.push("3. Les peurs essentielles (les freins) : kick + h1 + div.rule puis <div class=\"bars\"> avec un <div class=\"bar\"><b>[thème]<span>[mots cités · dit surtout par …]</span></b><div class=\"track\"><div class=\"fill\" style=\"width:[%]%\"></div></div><div class=\"val\">[%] %</div></div> par thème, du plus au moins fréquent.");
+  L.push("4. Où la salle est en avance, où elle est en retard : kick + h1 + div.rule puis <div class=\"grid g2\"><div class=\"col\"><h2>En avance</h2>[2 ou 3 .item]</div><div class=\"col\"><h2>En retard</h2>[2 ou 3 .item]</div></div> ; chaque item : <div class=\"item\"><b>[dimension]</b><i>[score]</i><span>[lecture en une phrase, chiffre à l'appui]</span></div>.");
+  L.push("5. Les zones d'impréparation : kick + h1 + div.rule puis <div class=\"grid g3\"> avec 3 <div class=\"card\"><span class=\"tag\">[type de risque]</span><h3>[zone]</h3><p>[pourquoi, chiffre à l'appui]</p></div> ; mets class=\"tag hot\" sur la plus critique.");
+  L.push("6. Le paradoxe de la salle : kick + h1 + div.rule puis <div class=\"quote\">[le paradoxe principal révélé par les données]</div><div class=\"facts\">[2 ou 3 <div class=\"fact\"><div class=\"big\">[chiffre]</div><p>[ce qu'il mesure]</p></div>]</div>.");
+  L.push("7. Pas le même parcours : kick + h1 + div.rule puis <div class=\"grid g3\"> avec 3 <div class=\"card\"><span class=\"tag\">[segment · n = X]</span><h3>[sa priorité]</h3><p>[ce qui le distingue]</p></div> ; choisis les segments (niveaux regroupés ou tailles) qui discriminent le plus.");
+  L.push("8. Les questions essentielles pour un DRH : kick + h1 + div.rule puis <ol class=\"qs\"> avec 5 <li>[question forte]<span>[pourquoi, chiffre de la salle à l'appui]</span></li>.");
+  L.push("Titres (h1) courts, avec un mot clé en <em>. Kick = petit surtitre en capitales (ex. « Les freins »).");
+  L.push("");
+  L.push("DONNÉES (JSON)");
+  L.push(JSON.stringify(data));
+  L.push("");
+  L.push("GABARIT HTML À REPRENDRE");
+  L.push(MENTAT_TEMPLATE);
+  return L.join('\n');
+}
+async function copyForClaude(btn){
+  const msg=document.getElementById('cl-msg');
+  if(!rows.length){if(msg)msg.textContent='Aucune réponse pour le moment.';return;}
+  const text=buildClaudePrompt();
+  let ok=false;
+  try{await navigator.clipboard.writeText(text);ok=true;}catch(e){}
+  if(!ok){const ta=document.getElementById('cl-fallback');ta.value=text;ta.style.display='block';ta.focus();ta.select();try{ok=document.execCommand('copy');}catch(e){}}
+  if(msg)msg.innerHTML=ok?'✓ Copié : '+rows.length+' réponses anonymes et la consigne d\'analyse. Collez dans Claude (Ctrl+V) puis Entrée.':'Sélectionnez le texte ci-dessous et copiez-le (Ctrl+C).';
+  if(btn){btn.classList.add('done');setTimeout(()=>btn.classList.remove('done'),2500);}
+}
+
 
 // ---------- chrono ----------
 function startTimer(min){timerEnd=Date.now()+min*60000;const t=document.getElementById('timer');if(t)t.style.display='flex';clearInterval(timerInt);timerInt=setInterval(tick,250);tick();}
